@@ -1,7 +1,5 @@
 require "optparse"
 
-require "./utils.rb"
-
 class MCS
   SEC_PER_SYMBOL=4.0/1000.0/1000.0
 
