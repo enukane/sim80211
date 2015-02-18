@@ -1,4 +1,4 @@
-require './mcs.rb'
+require_relative "mcstable/mcstable"
 
 class GI
   GI_SEC_SHORT=400.0/1000/1000/1000
