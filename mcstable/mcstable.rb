@@ -1,6 +1,9 @@
 require "optparse"
 
 class MCS
+  MILLI=1/1000.0
+  MICRO=MILLI/1000.0
+  NANO=MICRO/1000.0
   SEC_PER_SYMBOL=4.0/1000.0/1000.0
 
   MCS_MIN=0
@@ -82,10 +85,14 @@ class MCS
     databits = calc_databits(ss, mod, rate, width)
 
     # [bits/sec] of single stream = [bits/symbol]  / [sec/symbol]
-    bps = databits / SEC_PER_SYMBOL
+    if shortgi
+      bps = databits / (SEC_PER_SYMBOL - 400 * NANO)
+    else
+      bps = databits / SEC_PER_SYMBOL
+    end
 
     # shortgi: XXX this is no good
-    bps = bps * 1.11 if shortgi
+    # bps = bps * 1.11 if shortgi
 
     # [Mbits/sec] = [bits/sec] / 1M
     mbps = bps / 1000.0 / 1000.0
