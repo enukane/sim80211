@@ -72,14 +72,17 @@ class APTimeCounter
   end
 end
 
-b_dssslong = BeaconsTimeDSSSLong.new.single_beacon_time_us
-b_dsssshort = BeaconsTimeDSSSShort.new.single_beacon_time_us
-b_ofdm =  BeaconsTimeOFDM5G.new.single_beacon_time_us
+if __FILE__ == $0
+  b_dssslong = BeaconsTimeDSSSLong.new.single_beacon_time_us
+  b_dsssshort = BeaconsTimeDSSSShort.new.single_beacon_time_us
+  b_fdm =  BeaconsTimeOFDM5G.new.single_beacon_time_us
 
-1.upto(40) do |n|
-  long = APTimeCounter.new(b_dssslong, n).total_bps(130)
-  short = APTimeCounter.new(b_dsssshort, n).total_bps(130)
-  ofdm = APTimeCounter.new(b_ofdm, n).total_bps(130)
-  print "#{long}, #{short}, #{ofdm}\n"
+  print "#{b_dssslong}, #{b_dsssshort}, #{b_ofdm}\n"
+
+  1.upto(40) do |n|
+    long = APTimeCounter.new(b_dssslong, n).total_bps(130)
+    short = APTimeCounter.new(b_dsssshort, n).total_bps(130)
+    ofdm = APTimeCounter.new(b_ofdm, n).total_bps(130)
+    print "#{long}, #{short}, #{ofdm}\n"
+  end
 end
-
